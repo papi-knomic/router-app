@@ -10,9 +10,9 @@
     import axios from 'axios';
 
 export default {
+    props: ['id'],
     data() {
         return {
-            id: this.$route.params.id,
             product: null
         }
     },

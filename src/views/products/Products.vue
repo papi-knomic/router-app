@@ -1,6 +1,6 @@
 <template lang="">
     <h1>Products</h1>
-    <div v-for="product in products" :key="product.id">
+    <div v-for="product in products" :key="product.id" class="product">
         <router-link :to="{name: 'productsDetails', params: { id: product.id} }"><h2>{{product.name}}</h2></router-link>
     </div>
     
@@ -25,6 +25,21 @@ export default {
 </script>
 
 
-<style lang="">
-    
+<style>
+  .product h2{
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px auto;
+    max-width: 600px;
+    cursor: pointer;
+    color: #444;
+  } 
+  
+  .product h2:hover{
+    background: #ddd;
+  }
+  .product a{
+    text-decoration: none;
+  }
 </style>

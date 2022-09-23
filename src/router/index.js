@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
+import NotFoundView from '../views/404 .vue'
 import ProductsView from '../views/products/Products.vue'
 import ProductDetailsView from '../views/products/ProductsDetails.vue'
 
@@ -26,7 +27,21 @@ const routes = [
   {
     path: '/products/:id',
     name: 'productsDetails',
-    component: ProductDetailsView
+    component: ProductDetailsView,
+    props: true
+  },
+
+  //redirect
+  {
+    path: '/all-products',
+    redirect: '/products'
+  },
+
+  //catch all 404
+  {
+    path: '/:catchAll(.*)',
+    name: '404',
+    component: NotFoundView
   }
 ]
 
