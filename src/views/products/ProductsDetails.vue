@@ -1,13 +1,15 @@
 <template lang="">
-    <div>
-        <h1> Product Detail Page</h1>
-        <p>This is the job id {{ id }}</p>
-        <p v-if="product">This is the product price {{ product.price }}</p>
+    <h1> Product Detail Page</h1>
+    <div v-if="product">
+        <p>This is the product id {{ id }}</p>
+        <p>This is the product price {{ product.price }}</p>
+    </div>
+    <div v-else>
+        <p>It's loading.....</p>
     </div>
 </template>
 
 <script>
-    import axios from 'axios';
 
 export default {
     props: ['id'],
@@ -17,9 +19,10 @@ export default {
         }
     },
     mounted () {
-    axios
-      .get('http://127.0.0.1:8000/api/products/'+ this.id)
-      .then(response => (this.product = response.data.data))
+        fetch('http://127.0.0.1:8000/api/products/' + this.id)
+      .then(res => res.json())
+      .then( data => this.product = data.data)
+      .catch( error => console.log(error.message))
   }
 }
 </script>

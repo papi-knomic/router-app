@@ -1,14 +1,18 @@
 <template lang="">
     <h1>Products</h1>
-    <div v-for="product in products" :key="product.id" class="product">
+    <div v-if="products">
+      <div v-for="product in products" :key="product.id" class="product">
         <router-link :to="{name: 'productsDetails', params: { id: product.id} }"><h2>{{product.name}}</h2></router-link>
+    </div>
+    </div>
+    <div v-else>
+      <p>Loading Products....</p>
     </div>
     
 </template>
 
 
 <script>
-import axios from 'axios';
 
 export default {
     data () {
@@ -17,9 +21,10 @@ export default {
     }
   },
   mounted () {
-    axios
-      .get('http://127.0.0.1:8000/api/products')
-      .then(response => (this.products = response.data.data))
+    fetch('http://127.0.0.1:8000/api/products')
+      .then(res => res.json())
+      .then( data => this.products = data.data)
+      .catch( error => console.log(error.message))
   }
 }
 </script>
